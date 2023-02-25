@@ -1,0 +1,9 @@
+node_modules
+*.log*
+src/.nuxt
+.nitro
+.cache
+.output
+.env
+dist
+.vscode
