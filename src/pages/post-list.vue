@@ -12,9 +12,28 @@ console.log({ posts });
 
 <template>
   <div class="post-list-page">
-    <ul>
-      <li v-for="post in posts" :key="post.id">{{ post.content }}</li>
-    </ul>
+    <v-card
+      v-for="post in posts"
+      :key="post.id"
+      class="mx-auto my-4"
+      max-width="344"
+      variant="outlined"
+      :style="{backgroundColor: '#336D95'}"
+    >
+      <v-card-item>
+        <div class="text-overline mb-1">ユーザー名</div>
+        <div class="mb-1">ユーザーID</div>
+        <div class="text-bold text-caption">
+          {{ post.content }}
+        </div>
+        <div>タグ</div>
+      </v-card-item>
+
+      <v-card-actions>
+        <v-btn icon="mdi-comment" variant="text" color="white"></v-btn>
+        <v-btn icon="mdi-thumb-up" variant="text" color="white"></v-btn>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
@@ -24,5 +43,6 @@ console.log({ posts });
 .post-list-page {
   background-color: $main-backgrond-color;
   height: 100vh;
+  padding: 16px 0;
 }
 </style>
