@@ -2,6 +2,7 @@
 import ServiceLogo from "../assets/images/main_service_logo.png";
 const postFormInput = reactive({
   form: true,
+	name: "",
   email: "",
   password: "",
   loging: false,
@@ -12,15 +13,15 @@ const onSubmitLoginForm = () => {
 };
 
 const postFormRules = reactive({
+	name: (v) => !!v,
 	email: (v) => !!v && !!v.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
 	password: (v) => !!v && !!v.match(/^.{4,12}$/),
 })
 
-const openSignUpPage = () => console.log('openSignUpPage')
 </script>
 
 <template>
-  <div class="sign-in-page">
+  <div class="sign-up-page">
     <div class="service-content">
       <div>
         <img
@@ -40,6 +41,14 @@ const openSignUpPage = () => console.log('openSignUpPage')
       v-model="postFormInput.form"
       @submit.prevent="onSubmitLoginForm"
     >
+			<v-text-field
+        v-model="postFormInput.name"
+        :readonly="postFormInput.loading"
+        :rules="[postFormRules.name]"
+        class="mb-2"
+        clearable
+        label="Name"
+      />
       <v-text-field
         v-model="postFormInput.email"
         :readonly="postFormInput.loading"
@@ -47,7 +56,7 @@ const openSignUpPage = () => console.log('openSignUpPage')
         class="mb-2"
         clearable
         label="Email"
-      ></v-text-field>
+      />
 
       <v-text-field
         v-model="postFormInput.password"
@@ -57,11 +66,7 @@ const openSignUpPage = () => console.log('openSignUpPage')
         label="Password"
 				type="password"
         placeholder="Enter your password"
-      ></v-text-field>
-
-      <div>
-        <v-chip @click="openSignUpPage" class="font-bold" variant="text">新規登録はこちら</v-chip>
-      </div>
+      />
 
       <v-btn
         width="150px"
@@ -69,9 +74,9 @@ const openSignUpPage = () => console.log('openSignUpPage')
         :loading="postFormInput.loading"
         size="large"
         type="submit"
-        class="sign-in-button"
+        class="sign-up-button"
       >
-        ログイン
+        新規登録
       </v-btn>
     </v-form>
   </div>
@@ -79,7 +84,7 @@ const openSignUpPage = () => console.log('openSignUpPage')
 
 <style lang="scss" scoped>
 @import "../assets/css/variable.scss";
-.sign-in-page {
+.sign-up-page {
   background: $primary-background-color;
   height: 100vh;
   padding: 86px 0;
@@ -89,7 +94,7 @@ const openSignUpPage = () => console.log('openSignUpPage')
     text-align: center;
   }
 
-  .sign-in-button {
+  .sign-up-button {
     color: white;
     background-color: #336d95;
   }
